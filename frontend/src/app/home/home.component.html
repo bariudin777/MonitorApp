@@ -1,0 +1,57 @@
+
+<div class="centered-content">
+    <div class="monitor-type-container">
+        <div class="sidebar has-background-white">
+            <h1 class="title has-text-primary">
+               Monitor Types 
+            </h1>
+            <!-- Here i display the monitor types buttons-->
+            <button class='button' *ngFor="let item of list_of_btn; let i = index"
+             (click)='onClick(item)'
+            >
+             {{item.Name}} 
+            </button>
+        </div>
+    </div>
+    <!--Here i display the monitor info-->
+    <div class="monitor-container has-background-light">
+        <h1 class="title has-text-primary">
+            Monitors
+        </h1>
+
+        <button class='button' *ngFor="let item of monitorInfoByType;"
+        (click)='(displayLegend(item))'
+        (click)="selectItem()"
+        >
+        {{item.Name}} 
+       </button>
+       <!-- Create a model for legend display-->
+       <!-- need to create outer modal for code cleanness-->
+       <div class="modal is-active" *ngIf="showModal"  (onClose)="showModal=false" >
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Legend for selected monitor</p>
+            <button class="delete" aria-label="close" (click)="cancel()"></button>
+          </header>
+          <section class="modal-card-body">
+            <div *ngFor="let item of legendInfo">
+
+              <div *ngFor="let data of item">
+                <div class="dx-field-label">
+                  <label>{{data.Label}} ------------------------  {{data.Color}}</label>
+                  <!--Here i tyred to add a color box- but got problem with the 
+                  js injection to style code.
+                  -->
+                </div>
+              </div>
+            </div>
+
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button" (click)="cancel()">Cancel</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+</div>
